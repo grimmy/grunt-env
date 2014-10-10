@@ -82,7 +82,7 @@ module.exports = function (grunt) {
 
   function remove(value, key) {
     if(!process.env[key]) return grunt.log.writeln(key + ' doesn\'t exist, can\'t remove.');
-    process.env[key] = undefined;
+    delete process.env[key];
   }
 
   function arrayLike(method, value, key) {
