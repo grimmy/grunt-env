@@ -50,7 +50,8 @@ module.exports = function (grunt) {
       replace : replace,
       unshift : arrayLike.bind({}, 'unshift'),
       push : arrayLike.bind({}, 'push'),
-      concat : arrayLike.bind({}, 'push')
+      concat : arrayLike.bind({}, 'push'),
+      remove : remove
     };
 
     _.forEach(options, function(optionData, option) {
@@ -77,6 +78,11 @@ module.exports = function (grunt) {
   function replace(value, key) {
     if (!process.env[key]) return grunt.log.writeln(key + ' doesn\'t exist, refusing to replace.');
     process.env[key] = value;
+  }
+
+  function remove(value, key) {
+    if(!process.env[key]) return grunt.log.writeln(key + ' doesn\'t exist, can\'t remove.');
+    process.env[key] = undefined;
   }
 
   function arrayLike(method, value, key) {
